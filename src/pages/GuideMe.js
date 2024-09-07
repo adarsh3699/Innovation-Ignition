@@ -91,6 +91,22 @@ function GuideME() {
 	// const [weather, setWeather] = useState(null);
 	const [msg, setMsg] = useState({ text: "", type: "" });
 	const [active, setActive] = useState(null);
+	// const [text, setText] = useState("");
+
+	const handleSpeak = useCallback(() => {
+		// setText(data[active]?.desc);
+		const text = data[active]?.desc;
+
+		if (!text) return;
+
+		// Check if the browser supports speech synthesis
+		if ("speechSynthesis" in window) {
+			const speech = new SpeechSynthesisUtterance(text);
+			window.speechSynthesis.speak(speech);
+		} else {
+			alert("Sorry, your browser does not support text-to-speech.");
+		}
+	}, [active]);
 
 	const handleMsgShown = useCallback((msgText, type) => {
 		if (msgText) {
@@ -123,29 +139,28 @@ function GuideME() {
 		// setLocation({ latitude, longitude });
 		console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-		for (let i = 0; i < data.length; i++) {
-			const dis1 = getDistanceFromLatLonInKm(data[0]?.latitude, data[0]?.longitude, latitude, longitude);
-			const dis2 = getDistanceFromLatLonInKm(data[1]?.latitude, data[1]?.longitude, latitude, longitude);
-			const dis3 = getDistanceFromLatLonInKm(data[2]?.latitude, data[2]?.longitude, latitude, longitude);
-			const dis4 = getDistanceFromLatLonInKm(data[3]?.latitude, data[3]?.longitude, latitude, longitude);
-			const dis5 = getDistanceFromLatLonInKm(data[4]?.latitude, data[4]?.longitude, latitude, longitude);
+		const dis1 = getDistanceFromLatLonInKm(data[0]?.latitude, data[0]?.longitude, latitude, longitude);
+		const dis2 = getDistanceFromLatLonInKm(data[1]?.latitude, data[1]?.longitude, latitude, longitude);
+		const dis3 = getDistanceFromLatLonInKm(data[2]?.latitude, data[2]?.longitude, latitude, longitude);
+		const dis4 = getDistanceFromLatLonInKm(data[3]?.latitude, data[3]?.longitude, latitude, longitude);
+		const dis5 = getDistanceFromLatLonInKm(data[4]?.latitude, data[4]?.longitude, latitude, longitude);
 
-			setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
-		}
+		setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
+		setLoading(false);
 
-		try {
-			fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-				.then((response) => response.json())
-				.then((data) => {
-					// setWeather(data);
-					setLoading(false);
-					// console.log(data);
-				})
-				.catch((error) => console.log(error));
-		} catch (error) {
-			console.log(error);
-			handleMsgShown("Unable to retrieve your location", "error");
-		}
+		// try {
+		// 	fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+		// 		.then((response) => response.json())
+		// 		.then((data) => {
+		// 			// setWeather(data);
+		// 			setLoading(false);
+		// 			// console.log(data);
+		// 		})
+		// 		.catch((error) => console.log(error));
+		// } catch (error) {
+		// 	console.log(error);
+		// 	handleMsgShown("Unable to retrieve your location", "error");
+		// }
 	}
 
 	function error1() {
@@ -181,7 +196,7 @@ function GuideME() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	console.log(active);
+	// console.log(active);
 
 	return (
 		<div id="GuideME">
@@ -204,6 +219,9 @@ function GuideME() {
 						<li key={index}>{each}</li>
 					))}
 				</ul>
+				<button className="speakBtn" onClick={handleSpeak}>
+					Speak
+				</button>
 			</div>
 
 			<MapContainer center={position} zoom={13} style={{ height: "50vh", width: "100%" }}>

@@ -21,7 +21,7 @@ const NavBar = () => {
 						</a>
 					</li>
 					<li>
-						<a href="#about" className="menu-btn active">
+						<a href="/#about" className="menu-btn active">
 							Our Vision
 						</a>
 					</li>

@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useCallback, useState } from "react";
 
 const NavBar = () => {
+	const [showMenu, setShowMenu] = useState(false);
+
+	const handleMenu = useCallback(() => {
+		setShowMenu(!showMenu);
+	}, [showMenu]);
+
 	return (
 		<nav className="navbar">
 			<div className="max-width">
@@ -9,7 +15,7 @@ const NavBar = () => {
 						Trip<span>Guide</span>
 					</a>
 				</div>
-				<ul className="menu">
+				<ul className={showMenu ? "menu active" : "menu"}>
 					<li>
 						<a href="/" className="menu-btn">
 							Home
@@ -21,7 +27,7 @@ const NavBar = () => {
 						</a>
 					</li>
 					<li>
-						<a href="/#about" className="menu-btn active">
+						<a href="/#about" className="menu-btn active" onClick={handleMenu}>
 							Our Vision
 						</a>
 					</li>
@@ -31,7 +37,7 @@ const NavBar = () => {
 						</a>
 					</li> */}
 				</ul>
-				<div className="menu-btn">
+				<div className="menu-btn" onClick={handleMenu}>
 					<i className="fas fa-bars"></i>
 				</div>
 			</div>

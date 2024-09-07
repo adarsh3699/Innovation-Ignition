@@ -87,8 +87,6 @@ const data = [
 
 function GuideME() {
 	const [loading, setLoading] = useState(true);
-	// const [location, setLocation] = useState(null);
-	// const [weather, setWeather] = useState(null);
 	const [msg, setMsg] = useState({ text: "", type: "" });
 	const [active, setActive] = useState(null);
 	// const [text, setText] = useState("");
@@ -184,15 +182,16 @@ function GuideME() {
 		return deg * (Math.PI / 180);
 	}
 
-	useEffect(() => {
-		function handleLocationClick() {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(success, error1);
-				console.log("Geolocation supported");
-			} else {
-				console.log("Geolocation not supported");
-			}
+	const handleLocationClick = useCallback(() => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(success, error1);
+			console.log("Geolocation supported");
+		} else {
+			console.log("Geolocation not supported");
 		}
+	}, []);
+
+	useEffect(() => {
 		handleLocationClick();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -220,9 +219,14 @@ function GuideME() {
 						<li key={index}>{each}</li>
 					))}
 				</ul>
-				<button className="speakBtn" onClick={handleSpeak}>
-					Speak
-				</button>
+				<div className="Btn_flex">
+					<button className="speakBtn" onClick={handleSpeak}>
+						Speak
+					</button>
+					<button className="speakBtn" onClick={handleLocationClick}>
+						Refresh
+					</button>
+				</div>
 			</div>
 
 			<MapContainer center={position} zoom={13} style={{ height: "50vh", width: "100%" }}>

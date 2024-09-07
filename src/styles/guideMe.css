@@ -1,0 +1,51 @@
+#GuideME {
+	background-color: #f5f5f5;
+	font-family: 'Roboto', sans-serif;
+	height: 100vh;
+	background: linear-gradient(135deg, rgba(241, 231, 103, 1) 0%, rgba(254, 182, 69, 1) 100%);
+	padding: 20px;
+}
+
+.react-slideshow-container {
+	max-width: 70%;
+	margin: auto;
+	margin-top: 100px;
+}
+
+.react-slideshow-container .default-nav {
+	margin: 15px !important;
+	margin: unset;
+	background-color: unset !important;
+	fill: white;
+}
+
+.react-slideshow-container + ul.indicators {
+	top: 50%;
+	margin-top: 10px;
+}
+
+.react-slideshow-container + ul.indicators li {
+	padding: 0 10px;
+}
+
+.react-slideshow-container + ul.indicators .each-slideshow-indicator:before {
+	background: white;
+	height: 10px;
+	width: 10px;
+}
+
+.sliderImg {
+	aspect-ratio: 16/9;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	background-size: cover;
+}
+
+.GuideME_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 50px 0;
+}

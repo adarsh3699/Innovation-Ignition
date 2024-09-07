@@ -145,6 +145,7 @@ function GuideME() {
 
 		setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
 		setLoading(false);
+		handleMsgShown("Location Retrieved Successfully", "success");
 
 		// try {
 		// 	fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)

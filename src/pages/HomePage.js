@@ -12,7 +12,6 @@ function HomePage() {
 			<div className="scroll-up-btn">
 				<div className="fas fa-angle-up"></div>
 			</div>
-
 			{/* <!-- home section start --> */}
 			<HeroSection />
 			{/* <!-- about section start --> */}

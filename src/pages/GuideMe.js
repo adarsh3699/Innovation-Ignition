@@ -164,6 +164,7 @@ function GuideME() {
 	}
 
 	function error1() {
+		handleMsgShown("Unable to retrieve your location", "error");
 		console.log("Unable to retrieve your location");
 	}
 

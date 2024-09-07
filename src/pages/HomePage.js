@@ -3,8 +3,6 @@ import React from "react";
 import HeroSection from "../components/heroSection/HeroSection";
 import About from "../components/about/About";
 import Creativity from "../components/creativity/creativity";
-// import Countdown from '../components/countdown/Countdown';
-import Footer from "../components/footer/FootBar";
 
 function HomePage() {
 	return (
@@ -19,7 +17,7 @@ function HomePage() {
 			{/* <!-- creativity section start --> */}
 			<Creativity />
 
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

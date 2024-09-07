@@ -1,17 +1,18 @@
-import React, { Suspense, lazy } from 'react';
-import { Navigate, Routes as Switch, Route } from 'react-router-dom';
-import Loader from './components/loader/Loader';
-import NavBar from './components/navbar/NavBar';
+import React, { Suspense, lazy } from "react";
+import { Navigate, Routes as Switch, Route } from "react-router-dom";
+import Loader from "./components/loader/Loader";
+import NavBar from "./components/navbar/NavBar";
+import Footer from "./components/footer/FootBar";
 
-import './styles/app.css';
+import "./styles/app.css";
 
 // import LoginPage from './pages/LoginPage';
 // import HomePage from "./pages/HomePage";
 // import NotesPage from "./pages/NotesPage"
 // import CreateAcc from "./pages/CreateAcc";
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const GuideMe = lazy(() => import('./pages/GuideMe'));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const GuideMe = lazy(() => import("./pages/GuideMe"));
 
 function Routes() {
 	return (
@@ -19,7 +20,7 @@ function Routes() {
 			fallback={
 				<div id="loadingScreen">
 					Loading
-					<Loader isLoading={true} sx={{ marginTop: '10px' }} />
+					<Loader isLoading={true} sx={{ marginTop: "10px" }} />
 				</div>
 			}
 		>
@@ -31,6 +32,7 @@ function Routes() {
 						<>
 							<NavBar />
 							<HomePage />
+							<Footer />
 						</>
 					}
 				/>
@@ -41,6 +43,7 @@ function Routes() {
 						<>
 							<NavBar />
 							<GuideMe to="/" />
+							{/* <Footer /> */}
 						</>
 					}
 				/>

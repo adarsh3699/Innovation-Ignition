@@ -2,6 +2,8 @@
 
 For project description [PPT](https://www.canva.com/design/DAGQHKLXLs0/LkKLA5bKuUCSV0KgP0IPAg/view?utm_content=DAGQHKLXLs0&utm_campaign=designshare&utm_medium=link&utm_source=editor).
 
+https://github.com/user-attachments/assets/e013a5e9-45e4-4b89-b9a4-59ae0b5bbf55
+
 ## Problem Statemen
 
 Solving the lack of Accessible information for tourists with a Virtual Guide App
@@ -14,6 +16,13 @@ Our app is designed to solve the common problem tourists face when finding local
 -   We are unable to integrate with Google Maps data because it changes something to use, and we have no budget for this.
 -   The language translation feature is also not working for now because the Google Translate API also charges something, and we have no budget.
 
+## Our USP
+
+-   Assisting foreign tourists in escaping the hustle and bustle
+-   Locating a guide amidst the crowd
+-   Unlike conventional apps, we don't just provide information in bulk; instead, we aim to deliver an authentic experience.
+-   Trip Guide utilizes real-time GPS location tracking to offer details about places that align with your current location.
+                    
 ## Available Scripts
 
 In the project directory, you can run:
@@ -37,12 +46,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Our USP
-
--   Assisting foreign tourists in escaping the hustle and bustle
--   Locating a guide amidst the crowd
--   Unlike conventional apps, we don't just provide information in bulk; instead, we aim to deliver an authentic experience.
--   Trip Guide utilizes real-time GPS location tracking to offer details about places that align with your current location.

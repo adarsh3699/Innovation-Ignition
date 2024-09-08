@@ -142,6 +142,7 @@ function GuideME() {
 		const dis3 = getDistanceFromLatLonInKm(data[2]?.latitude, data[2]?.longitude, latitude, longitude);
 		const dis4 = getDistanceFromLatLonInKm(data[3]?.latitude, data[3]?.longitude, latitude, longitude);
 		const dis5 = getDistanceFromLatLonInKm(data[4]?.latitude, data[4]?.longitude, latitude, longitude);
+		console.log(dis1, dis2, dis3, dis4, dis5);
 
 		setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
 		setLoading(false);

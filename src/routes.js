@@ -43,7 +43,7 @@ function Routes() {
 						<>
 							<NavBar />
 							<GuideMe to="/" />
-							{/* <Footer /> */}
+							<Footer />
 						</>
 					}
 				/>

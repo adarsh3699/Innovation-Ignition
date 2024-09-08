@@ -9,7 +9,7 @@ function FootBar() {
 		<div id="bottomBar">
 			<img className="footerLogo" src={logoImg} alt="" />
 			<div>© 2024-28 (V 1.0)</div>
-			<div>Developed by Innovation Ignation</div>
+			<div>Developed by Innovation Ignition</div>
 		</div>
 	);
 }

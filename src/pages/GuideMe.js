@@ -147,20 +147,6 @@ function GuideME() {
 		setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
 		setLoading(false);
 		handleMsgShown("Location Retrieved Successfully", "success");
-
-		// try {
-		// 	fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-		// 		.then((response) => response.json())
-		// 		.then((data) => {
-		// 			// setWeather(data);
-		// 			setLoading(false);
-		// 			// console.log(data);
-		// 		})
-		// 		.catch((error) => console.log(error));
-		// } catch (error) {
-		// 	console.log(error);
-		// 	handleMsgShown("Unable to retrieve your location", "error");
-		// }
 	}
 
 	function error1() {
@@ -197,8 +183,6 @@ function GuideME() {
 		handleLocationClick();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	// console.log(active);
 
 	return (
 		<div id="GuideME">

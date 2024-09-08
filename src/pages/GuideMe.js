@@ -212,6 +212,14 @@ function GuideME() {
 					<button className="speakBtn" onClick={handleLocationClick}>
 						Refresh
 					</button>
+
+					<select>
+						<option className="speakBtn">English</option>
+						<option className="speakBtn">Hindi</option>
+						<option className="speakBtn">Punjabi</option>
+						<option className="speakBtn">Spanish</option>
+						<option className="speakBtn">French</option>
+					</select>
 				</div>
 			</div>
 

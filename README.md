@@ -8,6 +8,12 @@ Solving the lack of Accessible information for tourists with a Virtual Guide App
 
 Our app is designed to solve the common problem tourists face when finding local tour guides to provide detailed historical information about monuments and landmarks. By leveraging GPS technology, the app will act as a personal virtual tour guide, providing real-time information about the user's location, similar to what a real guide would offer.
 
+# Limitation
+
+-   We have only limited data of location.
+-   We are unable to integrate with Google Maps data because it changes something to use, and we have no budget for this.
+-   The language translation feature is also not working for now because the Google Translate API also charges something, and we have no budget.
+
 ## Available Scripts
 
 In the project directory, you can run:

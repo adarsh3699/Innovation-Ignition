@@ -35,8 +35,6 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const position = [31.2541, 75.7];
-
 const data = [
 	{
 		name: "LPU Block 14 101L Back Side",
@@ -89,22 +87,8 @@ function GuideME() {
 	const [loading, setLoading] = useState(true);
 	const [msg, setMsg] = useState({ text: "", type: "" });
 	const [active, setActive] = useState(null);
+	const [location, setLocation] = useState([31.2541, 75.7]);
 	// const [text, setText] = useState("");
-
-	const handleSpeak = useCallback(() => {
-		// setText(data[active]?.desc);
-		const text = data[active]?.desc;
-
-		if (!text) return;
-
-		// Check if the browser supports speech synthesis
-		if ("speechSynthesis" in window) {
-			const speech = new SpeechSynthesisUtterance(text);
-			window.speechSynthesis.speak(speech);
-		} else {
-			alert("Sorry, your browser does not support text-to-speech.");
-		}
-	}, [active]);
 
 	const handleMsgShown = useCallback((msgText, type) => {
 		if (msgText) {
@@ -130,31 +114,7 @@ function GuideME() {
 		return minIndex;
 		// console.log("Index of minimum distance:", minIndex);
 	};
-
-	function success(position) {
-		const latitude = position.coords.latitude;
-		const longitude = position.coords.longitude;
-		// setLocation({ latitude, longitude });
-		console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-		const dis1 = getDistanceFromLatLonInKm(data[0]?.latitude, data[0]?.longitude, latitude, longitude);
-		const dis2 = getDistanceFromLatLonInKm(data[1]?.latitude, data[1]?.longitude, latitude, longitude);
-		const dis3 = getDistanceFromLatLonInKm(data[2]?.latitude, data[2]?.longitude, latitude, longitude);
-		const dis4 = getDistanceFromLatLonInKm(data[3]?.latitude, data[3]?.longitude, latitude, longitude);
-		const dis5 = getDistanceFromLatLonInKm(data[4]?.latitude, data[4]?.longitude, latitude, longitude);
-		console.log(dis1, dis2, dis3, dis4, dis5);
-
-		setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
-		setLoading(false);
-		handleMsgShown("Location Retrieved Successfully", "success");
-	}
-
-	function error1() {
-		handleMsgShown("Unable to retrieve your location", "error");
-		console.log("Unable to retrieve your location");
-	}
-
-	function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+	const getDistanceFromLatLonInKm = useCallback((lat1, lon1, lat2, lon2) => {
 		var R = 6371; // Radius of the earth in km
 		var dLat = deg2rad(lat2 - lat1); // deg2rad below
 		var dLon = deg2rad(lon2 - lon1);
@@ -164,7 +124,34 @@ function GuideME() {
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		var d = R * c * 1000; // Distance in meter
 		return d;
-	}
+	}, []);
+
+	const success = useCallback(
+		(position) => {
+			const latitude = position.coords.latitude;
+			const longitude = position.coords.longitude;
+
+			setLocation([latitude, longitude]);
+			console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+			const dis1 = getDistanceFromLatLonInKm(data[0]?.latitude, data[0]?.longitude, latitude, longitude);
+			const dis2 = getDistanceFromLatLonInKm(data[1]?.latitude, data[1]?.longitude, latitude, longitude);
+			const dis3 = getDistanceFromLatLonInKm(data[2]?.latitude, data[2]?.longitude, latitude, longitude);
+			const dis4 = getDistanceFromLatLonInKm(data[3]?.latitude, data[3]?.longitude, latitude, longitude);
+			const dis5 = getDistanceFromLatLonInKm(data[4]?.latitude, data[4]?.longitude, latitude, longitude);
+			console.log(dis1, dis2, dis3, dis4, dis5);
+
+			setActive(findMinDistance([dis1, dis2, dis3, dis4, dis5]));
+			setLoading(false);
+			handleMsgShown("Location Retrieved Successfully", "success");
+		},
+		[getDistanceFromLatLonInKm, handleMsgShown]
+	);
+
+	const error1 = useCallback(() => {
+		handleMsgShown("Unable to retrieve your location", "error");
+		console.log("Unable to retrieve your location");
+	}, [handleMsgShown]);
 
 	function deg2rad(deg) {
 		return deg * (Math.PI / 180);
@@ -177,12 +164,27 @@ function GuideME() {
 		} else {
 			console.log("Geolocation not supported");
 		}
-	}, []);
+	}, [error1, success]);
 
 	useEffect(() => {
 		handleLocationClick();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const handleSpeak = useCallback(() => {
+		// setText(data[active]?.desc);
+		const text = data[active]?.desc;
+
+		if (!text) return;
+
+		// Check if the browser supports speech synthesis
+		if ("speechSynthesis" in window) {
+			const speech = new SpeechSynthesisUtterance(text);
+			window.speechSynthesis.speak(speech);
+		} else {
+			alert("Sorry, your browser does not support text-to-speech.");
+		}
+	}, [active]);
 
 	return (
 		<div id="GuideME">
@@ -223,17 +225,19 @@ function GuideME() {
 				</div>
 			</div>
 
-			<MapContainer center={position} zoom={13} style={{ height: "50vh", width: "100%" }}>
-				<TileLayer
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				/>
-				<Marker position={position}>
-					<Popup>
-						A pretty CSS3 popup. <br /> Easily customizable.
-					</Popup>
-				</Marker>
-			</MapContainer>
+			{!loading && (
+				<MapContainer center={location} zoom={13} style={{ height: "50vh", width: "100%" }}>
+					<TileLayer
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					/>
+					<Marker position={location}>
+						<Popup>
+							A pretty CSS3 popup. <br /> Easily customizable.
+						</Popup>
+					</Marker>
+				</MapContainer>
+			)}
 
 			{msg && <ShowMsg msgText={msg?.text} type={msg?.type} />}
 		</div>

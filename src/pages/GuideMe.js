@@ -229,12 +229,10 @@ function GuideME() {
 				<MapContainer center={location} zoom={13} style={{ height: "50vh", width: "100%" }}>
 					<TileLayer
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+						attribution="Innovation Ignition"
 					/>
 					<Marker position={location}>
-						<Popup>
-							A pretty CSS3 popup. <br /> Easily customizable.
-						</Popup>
+						<Popup>Current Location</Popup>
 					</Marker>
 				</MapContainer>
 			)}

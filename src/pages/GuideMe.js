@@ -81,6 +81,17 @@ const data = [
 		],
 		img: [gate_1, gate_2, gate_3],
 	},
+	{
+		name: "LPU Block 27",
+		latitude: 31.253062929735393,
+		longitude: 75.70340480236675,
+		desc: [
+			"Block 27 is a block of coumputer science department",
+			"It is located near the Robort Park",
+			"It is a 6 floor building",
+		],
+		img: [gate_1, gate_2, gate_3],
+	},
 ];
 
 function GuideME() {
